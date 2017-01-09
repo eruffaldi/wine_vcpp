@@ -1,2 +1,3 @@
 #!/bin/bash
-WINEDEBUG=-all wine /Volumes/BigData/metaVS2015/VC/bin/link.exe $*
+XP=/Volumes/BigData/metaVS2015/VCC/
+WINEDEBUG=-all wine ${XP}/VC/bin/link.exe $*

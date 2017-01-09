@@ -1,47 +1,45 @@
+#Introduction
 
-Creation
---------
+Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
-- use Visual Studio 2015 installation with Windows 10 SDK /VC
-- find Windows 8.1 SDK => /kit8.1
-- find Windows 10 SDK  => /kit10
-- find tools /tools
-- find mt => /mt/mt.*
+#Creation
 
-Install/build cmake for windows
+1) Have at hand Visual Studio 2015 free version and 
+	- put VC folder under /VC
+	- put Windows 8.1 SDK under /kit8.1
+	- put Windows 10 SDK under /kit10
+	- put tools under /tools
+	- put mt under /mt
 
-Then replace the files: vcvars32.bat and vcvarsall.bat 
+	About 7200 files for 2.51GB
 
-VC/bin/vcvars32.bat
-VC/vcvarsall.bat
+2) replace the files .bat below
+	VC/bin/vcvars32.bat
+	VC/x86_amd64/vcvarsx86_amd64.bat
+	VC/vcvarsall.bat
+
+3) mount this folder on c:\VC (e.g. symbolic link to .wine/drive_c/VC)
 
 
-Mount file for WINE
--------------------
-
-The following structure is needed inside WINE under c:\\VC (e.g. via symoblic link)
-
-VC\
-kit8.1\
-kit10\
-tools\
-
-Usage
------
+#Usage
 
 Use the following commands for creating the correct environment
 
-Windows 8.1: missing stdio.h!!!!
-
-	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 8.1
-
-Windows 10: uses lib kernel from Windows 8.1
+Windows 10 - x86 over x86
 
 	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0
 
-Next
-----
-- 64bit 
-- clearer instruction where to find things
+Windows 10 - x64 over x86 (resulting binary does not work on wine)
 
-Note: using cmake in crosscompilation mode to wine is not currently possible / aka slow
+	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0
+
+
+Note: Windows 10 uses kit8.1 libraries for kernel
+Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8.1
+
+	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 8.1
+
+
+#Next
+
+More testing, addint Kinect 2.0 SDK example, more check with cmake
