@@ -2,16 +2,22 @@
 Creation
 --------
 
-- use Visual Studio 2015 installation with Windows 10 SDK
-- find Windows 8.1 SDK => kit8.1
-- find Windows 10 SDK  => kit10
+- use Visual Studio 2015 installation with Windows 10 SDK /VC
+- find Windows 8.1 SDK => /kit8.1
+- find Windows 10 SDK  => /kit10
 - find tools /tools
 - find mt => /mt/mt.*
 
 Install/build cmake for windows
 
+Then replace the files: vcvars32.bat and vcvarsall.bat 
+
+VC/bin/vcvars32.bat
+VC/vcvarsall.bat
+
+
 Mount file for WINE
------
+-------------------
 
 The following structure is needed inside WINE under c:\\VC (e.g. via symoblic link)
 
