@@ -29,10 +29,9 @@ Windows 10 - x86 over x86
 
 	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0
 
-Windows 10 - x64 over x86 (resulting binary does not work on wine)
+Windows 10 - x64 over x86
 
 	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0
-
 
 Note: Windows 10 uses kit8.1 libraries for kernel
 Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8.1
@@ -43,3 +42,6 @@ Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8
 #Next
 
 More testing, addint Kinect 2.0 SDK example, more check with cmake
+
+Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
+
