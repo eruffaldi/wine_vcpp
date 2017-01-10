@@ -42,20 +42,20 @@ Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8
 
 Two bash aliases can be created
 
-  alias vc64="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0\""
-  alias vc86="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0\""
+	alias vc64="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0\""
+	alias vc86="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0\""
 
 Alternatively it is possible to create vc64.sh shell script that invokes the command on the command line and then exits
 
-  WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
+	WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
   
 #CMake
 
-CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "Program database manager mismatch" due to a wrong mspdb140.dll
+CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "C1902: Program database manager mismatch; please check your installation". This problem can occur also if cl is invoked with /Zi. It gives the related error "LNK1101: incorrect MSPDB140.DLL version; recheck installation of this product"
 
 #Next
 
-More testing, addint Kinect 2.0 SDK example, more check with cmake
+Solve CMake issue and test with Kinect 2 SDK
 
 Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
 
