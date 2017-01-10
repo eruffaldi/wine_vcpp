@@ -40,6 +40,19 @@ Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8
 
 	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 8.1
 
+Two bash aliases can be created
+
+  alias vc64="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0\""
+  alias vc86="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0\""
+
+Alternatively it is possible to create vc64.sh shell script that invokes the command on the command line and then exits
+
+  WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
+  
+#CMake
+
+CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "Program database manager mismatch" due to a wrong mspdb140.dll
+
 #Next
 
 More testing, addint Kinect 2.0 SDK example, more check with cmake
