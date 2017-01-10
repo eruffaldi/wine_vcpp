@@ -59,3 +59,7 @@ Solve CMake issue and test with Kinect 2 SDK
 
 Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
 
+#Related
+
+Kudos to http://ooo-imath.sourceforge.net/wiki/index.php/Cross-compiling_for_Windows#Visual_Studio_2015
+
