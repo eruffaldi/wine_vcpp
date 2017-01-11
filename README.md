@@ -6,7 +6,7 @@ Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
 Install samba3 with macport or brew for PDB support
 
-#Creation
+##Creation
 
 1) Have at hand Visual Studio 2015 free version and 
 	- put VC folder under /VC
@@ -23,6 +23,14 @@ Install samba3 with macport or brew for PDB support
 	VC/vcvarsall.bat
 
 3) mount this folder on c:\VC (e.g. symbolic link to .wine/drive_c/VC)
+
+##Patching
+
+api-ms-win-crt-string-l1-1-0.dll
+
+Under wine 1.8.x the function memcmpi_l is not implemented and PDB stuff of cl is not working. We need to replace it with a stub calling memcmpi. 
+
+Go into patch and do make. It is configured to generate that DLL using one recent spec file from Wine, for x86. 
 
 #Usage
 Note: Visual Studio 2015 comes with the following 6 variants: amd64,x86 -> amd64,x86,arm
