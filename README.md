@@ -61,6 +61,10 @@ These messages are caused by some limitations of Wine (as of 1.8.2): that is aft
 
 	wine: Call from 0x7b8291e5 to unimplemented function api-ms-win-crt-string-l1-1-0.dll._memicmp_l, aborting
 
+The status of this missing function can be checked in the Wine Sources: wine/dlls/api-ms-win-crt-string-l1-1-0/api-ms-win-crt-string-l1-1-0.spec as:
+
+	stub _memicmp_l
+
 #Next
 
 Solve CMake issue and test with Kinect 2 SDK
