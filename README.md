@@ -65,6 +65,15 @@ The status of this missing function can be checked in the Wine Sources: wine/dll
 
 	stub _memicmp_l
 
+This function is available in the ucrtbase of the Windows 10 SDK (ucrtbase.dll), but not in the Wine one as can be seen in wine/dlls/ucrtbase/ucrtbase.spec. 
+
+For comparison this is what happens for the implemented memicmp:
+	
+       @ cdecl _memicmp(str str long) ucrtbase._memicmp // in api-ms-win-crt-string-l1-1-0.spec
+       @ cdecl _memicmp(str str long) ntdll._memicmp // in ucrtbase.spec
+       
+A solution is to rebuild only api-ms-win-crt-string-l1-1-0 modifying api-ms-win-crt-string-l1-1-0.dll and make that specific function point to a custom implementation.
+
 #Next
 
 Solve CMake issue and test with Kinect 2 SDK
