@@ -2,6 +2,10 @@
 
 Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
+##Requirements
+
+Install samba3 with macport or brew for PDB support
+
 #Creation
 
 1) Have at hand Visual Studio 2015 free version and 
@@ -40,9 +44,43 @@ Note: the Windows 8.1 option is not available due to the lack of stdio.h in kit8
 
 	WINEDEBUG=-all wine cmd /K c:\\VC\\VC\\vcvarsall.bat x86 8.1
 
+Two bash aliases can be created
+
+	alias vc64="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0\""
+	alias vc86="WINEDEBUG=-all wine cmd /K \"c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0\""
+
+Alternatively it is possible to create vc64.sh shell script that invokes the command on the command line and then exits
+
+	WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
+  
+#CMake
+
+CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "C1902: Program database manager mismatch; please check your installation". This problem can occur also if cl is invoked with /Zi. It gives the related error "LNK1101: incorrect MSPDB140.DLL version; recheck installation of this product"
+
+These messages are caused by some limitations of Wine (as of 1.8.2): that is after installing samba3 that provides ntlm_auth there is an issue with the following missing function:
+
+	wine: Call from 0x7b8291e5 to unimplemented function api-ms-win-crt-string-l1-1-0.dll._memicmp_l, aborting
+
+The status of this missing function can be checked in the Wine Sources: wine/dlls/api-ms-win-crt-string-l1-1-0/api-ms-win-crt-string-l1-1-0.spec as:
+
+	stub _memicmp_l
+
+This function is available in the ucrtbase of the Windows 10 SDK (ucrtbase.dll), but not in the Wine one as can be seen in wine/dlls/ucrtbase/ucrtbase.spec. 
+
+For comparison this is what happens for the implemented memicmp:
+	
+       @ cdecl _memicmp(str str long) ucrtbase._memicmp // in api-ms-win-crt-string-l1-1-0.spec
+       @ cdecl _memicmp(str str long) ntdll._memicmp // in ucrtbase.spec
+       
+A solution is to rebuild only api-ms-win-crt-string-l1-1-0 modifying api-ms-win-crt-string-l1-1-0.dll and make that specific function point to a custom implementation.
+
 #Next
 
-More testing, addint Kinect 2.0 SDK example, more check with cmake
+Solve CMake issue and test with Kinect 2 SDK
 
 Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
+
+#Related
+
+Kudos to http://ooo-imath.sourceforge.net/wiki/index.php/Cross-compiling_for_Windows#Visual_Studio_2015
 

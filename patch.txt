@@ -4,10 +4,10 @@
 # Assemble it 32bit
 # Link against wine
 # Replace in MacPort
-winebuild --dll -E api-ms-win-crt-string-l1-1-0.spec -m32 > api-ms-win-crt-string-l1-1-0.as
+winebuild --dll -E api-ms-win-crt-string-l1-1-0.spec -m32 --external-symbols > api-ms-win-crt-string-l1-1-0.as 
 
 as -arch i386 api-ms-win-crt-string-l1-1-0.as -o api-ms-win-crt-string-l1-1-0.dll.o
 
-ld -dylib -arch i386 api-ms-win-crt-string-l1-1-0.dll.o -L/opt/local/lib/wine -lwinecrt0 -o api-ms-win-crt-string-l1-1-0.dll.so  -L/opt/local/lib -lwine -lkernel32.dll
+ld -dylib -arch i386 api-ms-win-crt-string-l1-1-0.dll.o -L/opt/local/lib/wine -lwinecrt0 -o api-ms-win-crt-string-l1-1-0.dll.so  -L/opt/local/lib -lwine -undefined dynamic_lookup
 
 sudo cp api-ms-win-crt-string-l1-1-0.dll.so /opt/local/lib/wine/api-ms-win-crt-string-l1-1-0.dll.so 
