@@ -1,0 +1,5 @@
+@ cdecl _memicmp_l(str str long ptr) memicmp_lprovider._memicmp_l
+
+sudo cp api-ms-win-crt-string-l1-1-0.dll.so /opt/local/lib/wine/api-ms-win-crt-string-l1-1-0.dll.so 
+
+sudo cp api-ms-win-crt-string-l1-1-0.dll.so.orig /opt/local/lib/wine/api-ms-win-crt-string-l1-1-0.dll.so 
