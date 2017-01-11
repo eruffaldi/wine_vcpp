@@ -2,6 +2,10 @@
 
 Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
+##Requirements
+
+Install samba3 with macport or brew for PDB support
+
 #Creation
 
 1) Have at hand Visual Studio 2015 free version and 
@@ -52,6 +56,10 @@ Alternatively it is possible to create vc64.sh shell script that invokes the com
 #CMake
 
 CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "C1902: Program database manager mismatch; please check your installation". This problem can occur also if cl is invoked with /Zi. It gives the related error "LNK1101: incorrect MSPDB140.DLL version; recheck installation of this product"
+
+These messages are caused by some limitations of Wine (as of 1.8.2): that is after installing samba3 that provides ntlm_auth there is an issue with the following missing function:
+
+	wine: Call from 0x7b8291e5 to unimplemented function api-ms-win-crt-string-l1-1-0.dll._memicmp_l, aborting
 
 #Next
 
