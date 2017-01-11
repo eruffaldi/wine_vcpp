@@ -63,24 +63,10 @@ Alternatively it is possible to create vc64.sh shell script that invokes the com
   
 #CMake
 
-CMake recognizes the compiler set-up by the vcvarsall script above. But then there is a problem with "C1902: Program database manager mismatch; please check your installation". This problem can occur also if cl is invoked with /Zi. It gives the related error "LNK1101: incorrect MSPDB140.DLL version; recheck installation of this product"
+CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe in compiler testing. Compiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1 and then make CMAKE_RC_COMPILER point to the alternative implementation from mingw (windres):
 
-These messages are caused by some limitations of Wine (as of 1.8.2): that is after installing samba3 that provides ntlm_auth there is an issue with the following missing function:
-
-	wine: Call from 0x7b8291e5 to unimplemented function api-ms-win-crt-string-l1-1-0.dll._memicmp_l, aborting
-
-The status of this missing function can be checked in the Wine Sources: wine/dlls/api-ms-win-crt-string-l1-1-0/api-ms-win-crt-string-l1-1-0.spec as:
-
-	stub _memicmp_l
-
-This function is available in the ucrtbase of the Windows 10 SDK (ucrtbase.dll), but not in the Wine one as can be seen in wine/dlls/ucrtbase/ucrtbase.spec. 
-
-For comparison this is what happens for the implemented memicmp:
-	
-       @ cdecl _memicmp(str str long) ucrtbase._memicmp // in api-ms-win-crt-string-l1-1-0.spec
-       @ cdecl _memicmp(str str long) ntdll._memicmp // in ucrtbase.spec
-       
-A solution is to rebuild only api-ms-win-crt-string-l1-1-0 modifying api-ms-win-crt-string-l1-1-0.dll and make that specific function point to a custom implementation.
+         CMAKE_RC_COMPILER:FILEPATH=...
+  
 
 #Next
 
