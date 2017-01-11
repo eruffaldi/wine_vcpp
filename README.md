@@ -67,6 +67,7 @@ CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe
 
          CMAKE_RC_COMPILER:FILEPATH=...
   
+Windres can be found on: https://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/binutils-2.25.1/binutils-2.25.1-1-mingw32-bin.tar.xz/download
 
 #Next
 
