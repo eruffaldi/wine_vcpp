@@ -2,6 +2,8 @@
 
 Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
+Status: simple manual builds work, /Zi requires patch to wine (below), nmake uses special flags and wine has problems, in general cmake suffers wine during compiler checks
+
 ##Requirements
 
 Install samba3 with macport or brew for PDB support
