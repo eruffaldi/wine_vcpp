@@ -73,8 +73,15 @@ Alternatively it is possible to create vc64.sh shell script that invokes the com
 	WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
   
 # CMake
+There are two options: the first is to run cmake outside wine, the second inside wine. In the former we define a toolchain that uses wine+cl as compiler, in the latter we use cmake for Windows.
 
-CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe in compiler testing. Compiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1:
+## Crosscompilation
+
+This employs two helper scripts (winecl and winelink) that call wine
+
+## Outside Wine
+
+Fails due to lack of rc.exe in compiler testing. Compiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1:
 
          cmake -DCMAKE_CXX_COMPILER_WORKS=1 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_BUILD_TYPE=Release
 
@@ -85,6 +92,7 @@ and then make CMAKE_RC_COMPILER point to the alternative implementation from min
 Windres can be found on: https://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/binutils-2.25.1/binutils-2.25.1-1-mingw32-bin.tar.xz/download
 
 We cannot use: -G "Visual Studio 14 2015" 
+
 #Next
 
 Solve CMake issue and test with Kinect 2 SDK
