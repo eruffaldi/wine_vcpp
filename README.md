@@ -1,14 +1,14 @@
-#Introduction
+# Introduction
 
 Using Visual Studio Compiler inside Wine (e.g. OSX) for x86 and x64 builds
 
 Status: simple manual builds work, /Zi requires patch to wine (below), nmake uses special flags and wine has problems, in general cmake suffers wine during compiler checks
 
-##Requirements
+## Requirements
 
 Install samba3 with macport or brew for PDB support
 
-##Creation
+## Creation
 
 1) Have at hand Visual Studio 2015 free version and 
 	- put VC folder under /VC
@@ -26,7 +26,7 @@ Install samba3 with macport or brew for PDB support
 
 3) mount this folder on c:\VC (e.g. symbolic link to .wine/drive_c/VC)
 
-##Patching
+## Patching
 
 api-ms-win-crt-string-l1-1-0.dll
 
@@ -34,7 +34,7 @@ Under wine 1.8.x the function memcmpi_l is not implemented and PDB stuff of cl i
 
 Go into patch and do make. It is configured to generate that DLL using one recent spec file from Wine, for x86. 
 
-#Usage
+# Usage
 Note: Visual Studio 2015 comes with the following 6 variants: amd64,x86 -> amd64,x86,arm
 
 Use the following commands for creating the correct environment
@@ -63,7 +63,7 @@ Alternatively it is possible to create vc64.sh shell script that invokes the com
 
 	WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86_amd64 10.0.10150.0 && $1 && exit"
   
-#CMake
+# CMake
 
 CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe in compiler testing. Compiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1 and then make CMAKE_RC_COMPILER point to the alternative implementation from mingw (windres):
 
@@ -71,13 +71,13 @@ CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe
   
 Windres can be found on: https://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/binutils-2.25.1/binutils-2.25.1-1-mingw32-bin.tar.xz/download
 
-#Next
+# Next
 
 Solve CMake issue and test with Kinect 2 SDK
 
 Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
 
-#Related
+# Related
 
 Kudos to http://ooo-imath.sourceforge.net/wiki/index.php/Cross-compiling_for_Windows#Visual_Studio_2015
 
