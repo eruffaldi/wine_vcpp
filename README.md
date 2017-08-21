@@ -82,8 +82,7 @@ Windres can be found on: https://sourceforge.net/projects/mingw/files/MinGW/Base
 
 # TODO
 
-1) Solve CMake issue and test with: Kinect 2 SDK and pre-compiled OpenCV 3.3
-2) Support for pure x86 and x86_amd64: note that Wine in Linux supports 64bit executables, while this is not a case of OSX due to a major incompatibility between OSX and Win64 in terms of ABI: https://www.winehq.org/wwn/364#Wine64%20on%20Mac%20OS%20X
+Solve CMake issue and test with: Kinect 2 SDK and pre-compiled OpenCV 3.3
 
 # Related
 
