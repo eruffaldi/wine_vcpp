@@ -8,9 +8,8 @@
 @endlocal
 
 :start
-@call :GetVSCommonToolsDir
-@if "%VS140COMNTOOLS%"=="" goto error_no_VS140COMNTOOLSDIR
-
+@rem call :GetVSCommonToolsDir
+@rem if "%VS140COMNTOOLS%"=="" goto error_no_VS140COMNTOOLSDIR
 @rem @call "%VS140COMNTOOLS%VCVarsQueryRegistry.bat" 32bit 64bit %1 %2
 
 set VSINSTALLDIR=MISSING
