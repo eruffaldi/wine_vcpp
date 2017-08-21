@@ -29,9 +29,9 @@ To make pure x86 remove all the folders named as follows: arm arm64 x64 amd64 am
 
 2) replace the files .bat below with the ones provided in this repository
 
-	VC/bin/vcvars32.bat
-	VC/x86_amd64/vcvarsx86_amd64.bat
-	VC/vcvarsall.bat
+* VC/bin/vcvars32.bat
+* VC/bin/x86_amd64/vcvarsx86_amd64.bat
+* VC/vcvarsall.bat
 
 3) inside wine mount this folder on c:\VC (e.g. using symbolic link to .wine/drive_c/VC)
 
