@@ -13,7 +13,9 @@ set(CMAKE_C_COMPILER_ID MSVC)
 set(BASE /Volumes/BigData/metaVS2015)
 set(CMAKE_C_COMPILER ${BASE}/winecl.sh)
 set(CMAKE_CXX_COMPILER ${BASE}/winecl.sh)
-set(CMAKE_CXX_LINK_EXECUTABLE ${BASE}/winelink.sh)
+set(CMAKE_LINKER ${BASE}/winelink.sh)
+
+set(CMAKE_CXX_LINK_EXECUTABLE "${BASE}/winelink.sh  <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS>  -o <TARGET> <LINK_LIBRARIES>")
 #set(CMAKE_Fortran_COMPILER /Applications/mxe/usr/bin/x86_64-w64-mingw32.shared.posix-gfortran)
 #set(CMAKE_RC_COMPILER /Applications/mxe/usr/bin/x86_64-w64-mingw32.shared.posix-windres)
 #set(CMAKE_MODULE_PATH "/Applications/mxe/usr/share/cmake/modules" ${CMAKE_MODULE_PATH}) # For mxe FindPackage scripts

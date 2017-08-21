@@ -1,3 +1,3 @@
 #!/bin/bash
-XP=/Volumes/BigData/metaVS2015/VCC/
-WINEDEBUG=-all wine ${XP}/VC/bin/link.exe $*
+echo "Invoking linker $*"
+WINEDEBUG=-all wine cmd /K "c:\\VC\\VC\\vcvarsall.bat x86 10.0.10150.0 && link $* && exit"

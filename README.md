@@ -74,9 +74,25 @@ Alternatively it is possible to create vc64.sh shell script that invokes the com
   
 # CMake
 
-CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe in compiler testing. Compiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1:
+Cross compilation with cmake can be achieved in two ways: from outside Wine using a toolchain that invokes Wine at every step, or inside Wine using cmake for windows.
 
-         cmake -DCMAKE_CXX_COMPILER_WORKS=1 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_BUILD_TYPE=Release
+## Outside Wine
+
+From outside wine we have a missing source file
+
+
+## Inside Wine
+TODO for compiler MSVC 19.0.24215.1
+
+We provide a toolchain file but the recognition of the compiler is very slow, although it improved from Wine 1.8 to 
+
+	  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake ..
+
+## Errors
+
+CMake, after solving the missing memcmpi_l function, fails due to lack of rc.exe in compiler testing. ompiler testing can be avoided using the variable CMAKE_C_COMPILER_WORKS=1:
+
+         cmake -DCMAKE_CXX_COMPILER_WORKS=1 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake  ..
 
 and then make CMAKE_RC_COMPILER point to the alternative implementation from mingw (windres):
 
