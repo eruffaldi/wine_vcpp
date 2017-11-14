@@ -14,6 +14,10 @@ Blocker:
 
 In addition to wine it is necessary to install samba3 to compile debug information with PDB. 
 
+Visual Studio 2015 free edition.
+
+Update: Microsoft is now providing Visual Studio 2015 C++ compiler as standalone package: http://landinghub.visualstudio.com/visual-cpp-build-tools
+
 ## Creation
 
 1) Have at hand Visual Studio 2015 free version and 
